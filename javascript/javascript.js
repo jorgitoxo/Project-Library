@@ -16,6 +16,11 @@ function addBookToLibrary(author, title, pageCount, readStatus) {
     myLibrary.push(newBook);
 }
 
+function showBooksInLibrary(library) {
+    library.forEach(element => {
+        console.log(element);
+    });
+}
 
 addBookToLibrary("George Orwell", "1984", 328, false);
 addBookToLibrary("Harper Lee", "To Kill a Mockingbird", 281, true);
@@ -27,4 +32,6 @@ addBookToLibrary("Dan Brown", "The Da Vinci Code", 489, true);
 addBookToLibrary("Jane Austen", "Pride and Prejudice", 279, false);
 addBookToLibrary("Yuval Noah Harari", "Sapiens: A Brief History of Humankind", 443, false);
 addBookToLibrary("Markus Zusak", "The Book Thief", 552, false);
-console.log();
+
+
+showBooksInLibrary(myLibrary);
