@@ -49,9 +49,19 @@ function newBookModal() {
     const newBookReadStatusYes = document.createElement("input");
     const newBookReadStatusNo = document.createElement("input");
     const newBookAdd = document.createElement("button");
+    const dialogClose = document.createElement("button");
+
+    newBookReadStatusYes.setAttribute('type', 'radio');
+    newBookReadStatusYes.setAttribute('name', "readStatusRadio");
+    newBookReadStatusNo.setAttribute('type', 'radio');
+    newBookReadStatusNo.setAttribute('name', "readStatusRadio");
+
+    newBookAdd.textContent = "Add";
+    dialogClose.textContent = "X";
+    
     dialogForm.append(  newBookAuthor, newBookTitle, newBookPageCount,
                         newBookReadStatusYes, newBookReadStatusNo,
-                        newBookAdd
+                        newBookAdd, dialogClose
     );
     dialogWindow.append(dialogForm);
 
