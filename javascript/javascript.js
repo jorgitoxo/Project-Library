@@ -17,8 +17,22 @@ function addBookToLibrary(author, title, pageCount, readStatus) {
 }
 
 function showBooksInLibrary(library) {
+    const booksInLibrary = document.querySelector(".books-list");
+
     library.forEach(element => {
-        console.log(element);
+        const bookListing = document.createElement("li");
+        const bookCover = document.createElement("div");
+        const bookInfo = document.createElement("div");
+
+        bookListing.setAttribute('class', "book-container");
+        bookCover.setAttribute('class', "book-cover");
+        bookInfo.setAttribute('class', "book-info");
+
+        bookListing.appendChild(bookCover);
+        bookListing.appendChild(bookInfo);
+        booksInLibrary.appendChild(bookListing);
+
+        bookInfo.textContent = `${element.title} ${element.author} ${element.pageCount} ${element.readStatus}`;
     });
 }
 
