@@ -1,4 +1,5 @@
 const myLibrary = [];
+// const myLibraryObj = new Array;
 
 function Book(author, title, pageCount, readStatus) {
     if(!(new.target)) {
@@ -36,6 +37,30 @@ function showBooksInLibrary(library) {
     });
 }
 
+function newBookModal() {
+    const newBookButton = document.getElementById("new-book-button");
+    const dialogWindow = document.createElement("dialog");
+    newBookButton.appendChild(dialogWindow);
+
+    const dialogForm = document.createElement("form")
+    const newBookAuthor = document.createElement("input");
+    const newBookTitle = document.createElement("input");
+    const newBookPageCount = document.createElement("input");
+    const newBookReadStatusYes = document.createElement("input");
+    const newBookReadStatusNo = document.createElement("input");
+    const newBookAdd = document.createElement("button");
+    dialogForm.append(  newBookAuthor, newBookTitle, newBookPageCount,
+                        newBookReadStatusYes, newBookReadStatusNo,
+                        newBookAdd
+    );
+    dialogWindow.append(dialogForm);
+
+    newBookButton.addEventListener('click', () => {
+        dialogWindow.showModal();
+        return;
+    });
+}
+
 addBookToLibrary("George Orwell", "1984", 328, false);
 addBookToLibrary("Harper Lee", "To Kill a Mockingbird", 281, true);
 addBookToLibrary("J.K. Rowling", "Harry Potter and the Sorcerer's Stone", 309, true);
@@ -47,5 +72,6 @@ addBookToLibrary("Jane Austen", "Pride and Prejudice", 279, false);
 addBookToLibrary("Yuval Noah Harari", "Sapiens: A Brief History of Humankind", 443, false);
 addBookToLibrary("Markus Zusak", "The Book Thief", 552, false);
 
-
 showBooksInLibrary(myLibrary);
+
+newBookModal();
