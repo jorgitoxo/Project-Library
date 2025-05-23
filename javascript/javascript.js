@@ -12,13 +12,14 @@ function Book(author, title, pageCount, readStatus) {
     this.readStatus = (readStatus === false) ? "Not read yet" : "Has been read";
 }
 
-function addBookToLibrary(author, title, pageCount, readStatus) {
+function addBookToMyLibrary(author, title, pageCount, readStatus) {
     const newBook = new Book(author, title, pageCount, readStatus);
     myLibrary.push(newBook);
 }
 
 function showBooksInLibrary(library) {
     const booksInLibrary = document.querySelector(".books-list");
+    booksInLibrary.replaceChildren();
 
     library.forEach(element => {
         const bookListing = document.createElement("li");
@@ -43,14 +44,17 @@ function newBookModal() {
     newBookButton.appendChild(dialogWindow);
 
     const dialogForm = document.createElement("form")
+
     const newBookAuthor = document.createElement("input");
     const newBookTitle = document.createElement("input");
     const newBookPageCount = document.createElement("input");
     const newBookReadStatusYes = document.createElement("input");
     const newBookReadStatusNo = document.createElement("input");
+
     const newBookAdd = document.createElement("button");
     const dialogClose = document.createElement("button");
 
+    dialogForm.setAttribute('method', 'dialog');
     newBookReadStatusYes.setAttribute('type', 'radio');
     newBookReadStatusYes.setAttribute('name', "readStatusRadio");
     newBookReadStatusNo.setAttribute('type', 'radio');
@@ -65,22 +69,35 @@ function newBookModal() {
     );
     dialogWindow.append(dialogForm);
 
+    dialogClose.addEventListener('click', () => {
+        dialogWindow.close();
+    });
+
+    newBookAdd.addEventListener('click', () => {
+        addBookToMyLibrary(newBookAuthor.value, newBookTitle.value,
+                            newBookPageCount.value, newBookReadStatusYes
+        )
+        showBooksInLibrary(myLibrary);
+        return;
+    });
+
     newBookButton.addEventListener('click', () => {
         dialogWindow.showModal();
         return;
     });
 }
 
-addBookToLibrary("George Orwell", "1984", 328, false);
-addBookToLibrary("Harper Lee", "To Kill a Mockingbird", 281, true);
-addBookToLibrary("J.K. Rowling", "Harry Potter and the Sorcerer's Stone", 309, true);
-addBookToLibrary("J.R.R. Tolkien", "The Hobbit", 310, false);
-addBookToLibrary("F. Scott Fitzgerald", "The Great Gatsby", 180, false);
-addBookToLibrary("Mary Shelley", "Frankenstein", 280, false);
-addBookToLibrary("Dan Brown", "The Da Vinci Code", 489, true);
-addBookToLibrary("Jane Austen", "Pride and Prejudice", 279, false);
-addBookToLibrary("Yuval Noah Harari", "Sapiens: A Brief History of Humankind", 443, false);
-addBookToLibrary("Markus Zusak", "The Book Thief", 552, false);
+
+addBookToMyLibrary("George Orwell", "1984", 328, false);
+addBookToMyLibrary("Harper Lee", "To Kill a Mockingbird", 281, true);
+addBookToMyLibrary("J.K. Rowling", "Harry Potter and the Sorcerer's Stone", 309, true);
+addBookToMyLibrary("J.R.R. Tolkien", "The Hobbit", 310, false);
+addBookToMyLibrary("F. Scott Fitzgerald", "The Great Gatsby", 180, false);
+addBookToMyLibrary("Mary Shelley", "Frankenstein", 280, false);
+addBookToMyLibrary("Dan Brown", "The Da Vinci Code", 489, true);
+addBookToMyLibrary("Jane Austen", "Pride and Prejudice", 279, false);
+addBookToMyLibrary("Yuval Noah Harari", "Sapiens: A Brief History of Humankind", 443, false);
+addBookToMyLibrary("Markus Zusak", "The Book Thief", 552, false);
 
 showBooksInLibrary(myLibrary);
 
