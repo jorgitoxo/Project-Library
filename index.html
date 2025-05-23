@@ -14,7 +14,33 @@
                 <ul>
                     <li><button>List/Card view toggle</button></li>
                     <li><button>Light/Dark mode</button></li>
-                    <li><button id="new-book-button">New Book</button></li>
+                    <li><button id="newBookBtn">New Book</button></li>
+                    <li>
+                        <dialog id="dialogWindow">
+                            <div>
+                                <button value="x" type="button" name="closeButton" id="closeButton">X</button>
+                            </div>
+                            <form action="/" method="dialog">
+                                <label for="newBookAuthor">
+                                    <div>Author</div>
+                                    <input type="text" name="newBookAuthor" id="newBookAuthor"></label>
+                                <label for="newBookTitle">
+                                    <div>Title</div>
+                                    <input type="text" name="newBookTitle" id="newBookTitle"></label>
+                                <label for="newBookPageCount">
+                                    <div>Page Count</div>
+                                    <input type="number" name="newBookPageCount" id="newBookPageCount"></label>
+                                <label for="newBookReadStatus">
+                                    <div>Has been read</div>
+                                    <input type="checkbox" name="newBookReadStatus" id="newBookReadStatus">
+                                </label>
+                                <div>
+                                    <button value="add" type="button" name="addButton" id="addButton">Add</button>
+                                    <button value="cancel" type="button" name="cancelButton" id="cancelButton">Cancel</button>
+                                </div>
+                            </form>
+                        </dialog>
+                    </li>
                 </ul>
             </div>
         </div>

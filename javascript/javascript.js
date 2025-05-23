@@ -39,52 +39,40 @@ function showBooksInLibrary(library) {
 }
 
 function newBookModal() {
-    const newBookButton = document.getElementById("new-book-button");
-    const dialogWindow = document.createElement("dialog");
-    newBookButton.appendChild(dialogWindow);
+    const newBookButton = document.getElementById("newBookBtn");
+    const dialogWindow = document.getElementById("dialogWindow");
 
-    const dialogForm = document.createElement("form")
+    const dialogClose = document.getElementById("closeButton");
+    const newBookAuthor = document.getElementById("newBookAuthor");
+    const newBookTitle = document.getElementById("newBookTitle");
+    const newBookPageCount = document.getElementById("newBookPageCount");
+    const newBookReadStatus = document.getElementById("newBookReadStatus");
+    // const newBookReadStatusNo = document.getElementById("newBookReadStatusNo");
 
-    const newBookAuthor = document.createElement("input");
-    const newBookTitle = document.createElement("input");
-    const newBookPageCount = document.createElement("input");
-    const newBookReadStatusYes = document.createElement("input");
-    const newBookReadStatusNo = document.createElement("input");
-
-    const newBookAdd = document.createElement("button");
-    const dialogClose = document.createElement("button");
-
-    dialogForm.setAttribute('method', 'dialog');
-    newBookReadStatusYes.setAttribute('type', 'radio');
-    newBookReadStatusYes.setAttribute('name', "readStatusRadio");
-    newBookReadStatusNo.setAttribute('type', 'radio');
-    newBookReadStatusNo.setAttribute('name', "readStatusRadio");
-
-    newBookAdd.textContent = "Add";
-    dialogClose.textContent = "X";
-    
-    dialogForm.append(  newBookAuthor, newBookTitle, newBookPageCount,
-                        newBookReadStatusYes, newBookReadStatusNo,
-                        newBookAdd, dialogClose
-    );
-    dialogWindow.append(dialogForm);
-
-    dialogClose.addEventListener('click', () => {
-        dialogWindow.close();
-    });
-
-    newBookAdd.addEventListener('click', () => {
-        addBookToMyLibrary(newBookAuthor.value, newBookTitle.value,
-                            newBookPageCount.value, newBookReadStatusYes
-        )
-        showBooksInLibrary(myLibrary);
-        return;
-    });
+    const dialogAdd = document.getElementById("addButton");
+    const dialogCancel = document.getElementById("cancelButton");
 
     newBookButton.addEventListener('click', () => {
         dialogWindow.showModal();
         return;
     });
+
+    dialogClose.addEventListener('click', () => {
+        dialogWindow.close();
+    });
+
+    dialogAdd.addEventListener('click', () => {
+        addBookToMyLibrary( newBookAuthor.value,
+                            newBookTitle.value,
+                            newBookPageCount.value,
+                            newBookReadStatus.checked);
+        showBooksInLibrary(myLibrary);
+        return;
+    });
+
+    dialogCancel.addEventListener('click', () => {
+        dialogWindow.close();
+    })
 }
 
 
