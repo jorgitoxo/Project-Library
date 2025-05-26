@@ -20,15 +20,15 @@
                             <div>
                                 <button value="x" type="button" name="closeButton" id="closeButton">X</button>
                             </div>
-                            <form action="/" method="dialog">
+                            <form action="/" method="dialog" name="dialogForm" id="dialogForm">
+                                <label for="newBookTitle">
+                                    <div>Title</div>
+                                    <input type="text" name="newBookTitle" id="newBookTitle" autofocus required></label>
                                 <label for="newBookAuthor">
                                     <div>Author</div>
                                     <input type="text" name="newBookAuthor" id="newBookAuthor"></label>
-                                <label for="newBookTitle">
-                                    <div>Title</div>
-                                    <input type="text" name="newBookTitle" id="newBookTitle"></label>
                                 <label for="newBookPageCount">
-                                    <div>Page Count</div>
+                                    <div>Number of pages</div>
                                     <input type="number" name="newBookPageCount" id="newBookPageCount"></label>
                                 <label for="newBookReadStatus">
                                     <div>Has been read</div>

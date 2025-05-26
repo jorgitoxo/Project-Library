@@ -41,13 +41,13 @@ function showBooksInLibrary(library) {
 function newBookModal() {
     const newBookButton = document.getElementById("newBookBtn");
     const dialogWindow = document.getElementById("dialogWindow");
+    const dialogForm = document.querySelector("dialog > form");
 
     const dialogClose = document.getElementById("closeButton");
     const newBookAuthor = document.getElementById("newBookAuthor");
     const newBookTitle = document.getElementById("newBookTitle");
     const newBookPageCount = document.getElementById("newBookPageCount");
     const newBookReadStatus = document.getElementById("newBookReadStatus");
-    // const newBookReadStatusNo = document.getElementById("newBookReadStatusNo");
 
     const dialogAdd = document.getElementById("addButton");
     const dialogCancel = document.getElementById("cancelButton");
@@ -67,10 +67,12 @@ function newBookModal() {
                             newBookPageCount.value,
                             newBookReadStatus.checked);
         showBooksInLibrary(myLibrary);
+        dialogForm.reset();
         return;
     });
 
     dialogCancel.addEventListener('click', () => {
+        dialogForm.reset();
         dialogWindow.close();
     })
 }
