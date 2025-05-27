@@ -10,6 +10,14 @@ function Book(author, title, pageCount, readStatus) {
     this.title = title;
     this.pageCount = pageCount;
     this.readStatus = (readStatus === false) ? "Not read yet" : "Has been read";
+    
+    this.deleteButton = document.createElement("button");
+    this.deleteButton.textContent = "Remove";
+    this.deleteButton.addEventListener('click', () => this.delete());
+}
+
+Book.prototype.delete = function() {
+    this.deleteButton.parentElement.remove();
 }
 
 function addBookToMyLibrary(author, title, pageCount, readStatus) {
@@ -25,6 +33,7 @@ function showBooksInLibrary(library) {
         const bookListing = document.createElement("li");
         const bookCover = document.createElement("div");
         const bookInfo = document.createElement("div");
+        const deleteButton = element.deleteButton;
 
         bookListing.setAttribute('class', "book-container");
         bookCover.setAttribute('class', "book-cover");
@@ -32,6 +41,7 @@ function showBooksInLibrary(library) {
 
         bookListing.appendChild(bookCover);
         bookListing.appendChild(bookInfo);
+        bookListing.appendChild(deleteButton);
         booksInLibrary.appendChild(bookListing);
 
         bookInfo.textContent = `${element.title} ${element.author} ${element.pageCount} ${element.readStatus}`;
