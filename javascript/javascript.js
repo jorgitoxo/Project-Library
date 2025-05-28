@@ -17,7 +17,14 @@ function Book(author, title, pageCount, readStatus) {
 }
 
 Book.prototype.delete = function() {
-    this.deleteButton.parentElement.remove();
+    let bookIndex = 0;
+
+    while ((myLibrary[bookIndex].id !== this.id)) {
+        bookIndex++;
+    };
+    
+    myLibrary.splice(bookIndex, 1);
+    showBooksInLibrary(myLibrary);
 }
 
 function addBookToMyLibrary(author, title, pageCount, readStatus) {
@@ -36,6 +43,7 @@ function showBooksInLibrary(library) {
         const deleteButton = element.deleteButton;
 
         bookListing.setAttribute('class', "book-container");
+        // bookListing.setAttribute('data-queueID', "book-container");
         bookCover.setAttribute('class', "book-cover");
         bookInfo.setAttribute('class', "book-info");
 
