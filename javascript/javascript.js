@@ -1,5 +1,4 @@
 const myLibrary = [];
-// const myLibraryObj = new Array;
 
 function Book(author, title, pageCount, readStatus) {
     if(!(new.target)) {
@@ -9,21 +8,33 @@ function Book(author, title, pageCount, readStatus) {
     this.author = author;
     this.title = title;
     this.pageCount = pageCount;
-    this.readStatus = (readStatus === false) ? "Not read yet" : "Has been read";
-    
+
+    this.readStatusFlag = readStatus;
+    this.availableStatus = ["Not read yet", "Has been read"];
+    this.readStatus = this.availableStatus[+this.readStatusFlag];
+
     this.deleteButton = document.createElement("button");
     this.deleteButton.textContent = "Remove";
     this.deleteButton.addEventListener('click', () => this.delete());
+
+    this.statusToggle = document.createElement("button");
+    this.statusToggle.textContent = "Toggle status";
+    this.statusToggle.addEventListener('click', () => this.toggleStatus());
 }
 
 Book.prototype.delete = function() {
     let bookIndex = 0;
-
     while ((myLibrary[bookIndex].id !== this.id)) {
         bookIndex++;
     };
     
     myLibrary.splice(bookIndex, 1);
+    showBooksInLibrary(myLibrary);
+}
+
+Book.prototype.toggleStatus = function() {
+    this.readStatusFlag = !this.readStatusFlag;
+    this.readStatus = this.availableStatus[+this.readStatusFlag];
     showBooksInLibrary(myLibrary);
 }
 
@@ -41,18 +52,21 @@ function showBooksInLibrary(library) {
         const bookCover = document.createElement("div");
         const bookInfo = document.createElement("div");
         const deleteButton = element.deleteButton;
+        const statusToggle = element.statusToggle;
 
         bookListing.setAttribute('class', "book-container");
-        // bookListing.setAttribute('data-queueID', "book-container");
         bookCover.setAttribute('class', "book-cover");
         bookInfo.setAttribute('class', "book-info");
 
+        // Group all book element nodes into one book listing element
         bookListing.appendChild(bookCover);
         bookListing.appendChild(bookInfo);
         bookListing.appendChild(deleteButton);
+        bookListing.appendChild(statusToggle);
+        // Append the book listing element node with all its children to the library view
         booksInLibrary.appendChild(bookListing);
 
-        bookInfo.textContent = `${element.title} ${element.author} ${element.pageCount} ${element.readStatus}`;
+        bookInfo.textContent = `${element.title} by ${element.author}. ${element.pageCount} pages. ${element.readStatus}.`;
     });
 }
 
@@ -95,18 +109,72 @@ function newBookModal() {
     })
 }
 
+const bookShortlist = [
+    {
+        "author": "George Orwell",
+        "title": "1984",
+        "pageCount": 328,
+        "readStatus": false
+    },
+    {
+        "author": "Harper Lee",
+        "title": "To Kill a Mockingbird",
+        "pageCount": 281,
+        "readStatus": true
+    },
+    {
+        "author": "J.K. Rowling",
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "pageCount": 309,
+        "readStatus": true
+    },
+    {
+        "author": "J.R.R. Tolkien",
+        "title": "The Hobbit",
+        "pageCount": 310,
+        "readStatus": false
+    },
+    {
+        "author": "F. Scott Fitzgerald",
+        "title": "The Great Gatsby",
+        "pageCount": 180,
+        "readStatus": false
+    },
+    {
+        "author": "Mary Shelley",
+        "title": "Frankenstein",
+        "pageCount": 280,
+        "readStatus": false
+    },
+    {
+        "author": "Dan Brown",
+        "title": "The Da Vinci Code",
+        "pageCount": 489,
+        "readStatus": true
+    },
+    {
+        "author": "Jane Austen",
+        "title": "Pride and Prejudice",
+        "pageCount": 279,
+        "readStatus": false
+    },
+    {
+        "author": "Yuval Noah Harari",
+        "title": "Sapiens: A Brief History of Humankind",
+        "pageCount": 443,
+        "readStatus": false
+    },
+    {
+        "author": "Markus Zusak",
+        "title": "The Book Thief",
+        "pageCount": 552,
+        "readStatus": false
+    }
+];
 
-addBookToMyLibrary("George Orwell", "1984", 328, false);
-addBookToMyLibrary("Harper Lee", "To Kill a Mockingbird", 281, true);
-addBookToMyLibrary("J.K. Rowling", "Harry Potter and the Sorcerer's Stone", 309, true);
-addBookToMyLibrary("J.R.R. Tolkien", "The Hobbit", 310, false);
-addBookToMyLibrary("F. Scott Fitzgerald", "The Great Gatsby", 180, false);
-addBookToMyLibrary("Mary Shelley", "Frankenstein", 280, false);
-addBookToMyLibrary("Dan Brown", "The Da Vinci Code", 489, true);
-addBookToMyLibrary("Jane Austen", "Pride and Prejudice", 279, false);
-addBookToMyLibrary("Yuval Noah Harari", "Sapiens: A Brief History of Humankind", 443, false);
-addBookToMyLibrary("Markus Zusak", "The Book Thief", 552, false);
+bookShortlist.forEach((book) => {
+    addBookToMyLibrary(book.author, book.title, book.pageCount, book.readStatus);
+});
 
 showBooksInLibrary(myLibrary);
-
 newBookModal();

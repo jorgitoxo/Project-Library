@@ -3,7 +3,7 @@
 Think of the DOM as the view for your data.
 Hint: instead of trying to delete specific DOM elements, just rebuild the entire thing after removing it from the data
 1. remove data
-2. clear DOM section you want to update (In your case, it'd be the list),
+2. clear DOM section you want to update (In your case, it'd be the list)
 3. render
 
 Thouhgts:
@@ -12,3 +12,17 @@ Thouhgts:
 1. Remove the book (object) from the array.
 2. Clear the DOM area for listing the books.
 3. Re-render the book list.
+
+Example:
+```
+Book.prototype.delete = function() {
+    let bookIndex = 0;
+
+    while ((myLibrary[bookIndex].id !== this.id)) {
+        bookIndex++;
+    };
+    
+    myLibrary.splice(bookIndex, 1);
+    showBooksInLibrary(myLibrary);
+}
+```
